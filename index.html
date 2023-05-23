@@ -1,18 +1,16 @@
 <h2 id="date-widget" style="font-family: sans-serif;"></h2>
 
 <script>
-    var dateElement = document.getElementById("date-widget");
-    var currentDate = new Date();
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    var formattedDate = currentDate.toLocaleDateString('fr-FR', options);
-    
-    var day = currentDate.toLocaleDateString('fr-FR', { weekday: 'long' });
-    var capitalizedDay = day.toUpperCase();
-    formattedDate = formattedDate.replace(day, capitalizedDay);
-    
-    var month = currentDate.toLocaleDateString('fr-FR', { month: 'long' });
-    var capitalizedMonth = month.toUpperCase();
-    formattedDate = formattedDate.replace(month, capitalizedMonth);
-    
-    dateElement.innerHTML = formattedDate;
+  var dateElement = document.getElementById("date-widget");
+
+  fetch("http://worldtimeapi.org/api/timezone/Europe/Paris")
+    .then(response => response.json())
+    .then(data => {
+      var currentDate = new Date(data.datetime);
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var formattedDate = currentDate.toLocaleDateString('fr-FR', options);
+      dateElement.innerHTML = formattedDate.toUpperCase();
+    })
+    .catch(error => console.log(error));
 </script>
+
