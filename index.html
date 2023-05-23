@@ -5,5 +5,8 @@
     var currentDate = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     var formattedDate = currentDate.toLocaleDateString('fr-FR', options);
+    var day = currentDate.toLocaleDateString('fr-FR', { weekday: 'long' });
+    var capitalizedDay = day.toUpperCase();
+    formattedDate = formattedDate.replace(day, capitalizedDay);
     dateElement.innerHTML = formattedDate;
 </script>
